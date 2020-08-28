@@ -1,0 +1,40 @@
+<div class="vh-100 w-100 d-flex flex-row container-fluid p-0">
+
+  <div class="bg-primary container-fluid text-white"
+       (mouseenter)="sideMenu.style.width = '20%'"
+       (mouseleave)="sideMenu.style.width = '5%'"
+       [ngStyle]="{width: '5%', height: '100%', transition: '.5s width ease'}"
+       #sideMenu>
+    <div class="row bg-dark" [class.text-center]="sideMenu.style.width === '5%'">
+      <div class="col-12 p-3">
+        <i class="font-weight-bold text-danger mx-1 basic-hover cursor-pointer la la-2x la-torii-gate"
+           title="home"
+           [routerLink]="'/'">
+        </i>
+        <ng-container *ngIf="sideMenu.style.width === '20%'">
+          <h4 class="font-weight-bold d-inline">John's salad bar!</h4>
+          <br>
+          <small class="font-italic">*But salads are components instead.</small>
+        </ng-container>
+      </div>
+    </div>
+    <ng-container *ngIf="sideMenu.style.width === '20%'">
+      <div class="row" *ngFor="let item of menu">
+        <div class="col-12 p-3 border-radius basic-hover font-weight-bold cursor-pointer text-center"
+             [routerLink]="item.path" [queryParams]="item.params || {}">
+          <i class="mr-1 la la-2x {{item.icon}}"></i>
+          <span>{{item.name}}</span>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="flex-fill overflow-y-auto">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col p-4">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

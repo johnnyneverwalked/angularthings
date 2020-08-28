@@ -1,0 +1,183 @@
+<ng-container *ngIf="isOngoing">
+
+    <div @fade class="tour-guide-backdrop" *ngIf="hasBackdrop" (click)="backDropEnd()"></div>
+
+    <div #tooltipShow class="d-inline-block tour-guide-show-tooltip m-1">
+        <app-button @fade
+                    action="view"
+                    displayName=""
+                    icon="la-comment"
+                    title="Εμφάνιση οδηγιών"
+                    (btnClick)="toggleTooltip(true, true)"
+                    *ngIf="visibleTooltipButton">
+        </app-button>
+    </div>
+
+    <app-button action="view"
+                displayName=""
+                icon="la-keyboard"
+                class="tour-guide-shortcuts"
+                title="Συντομέυσεις"
+                (btnClick)="shortcutsModal.show()">
+    </app-button>
+
+    <div #highlighted class="tour-guide-highlight-bg"
+         [hidden]="!hasBackdrop || scrolling"></div>
+
+    <div @fade
+         #tooltip
+         [class.border]="!hasBackdrop"
+         class="tour-guide-tooltip container-fluid"
+         *ngIf="visibleTooltip">
+<!--        <app-button *ngIf="steps[currentStep]?.dbId"-->
+<!--                    class="tour-guide-edit"-->
+<!--                    action="edit"-->
+<!--                    displayName=""-->
+<!--                    (btnClick)="showEditor()"-->
+<!--                    [class]="'btn-sm'">-->
+<!--        </app-button>-->
+
+        <div class="row border-bottom py-3">
+            <div class="col-12">
+                <h4 class="font-weight-bold m-0">
+                    <span [innerHTML]="tooltipContent.title"></span>
+                    <i class="float-right la la-minus font-weight-bold pointer"
+                       title="Απόκρυψη οδηγιών"
+                       (click)="toggleTooltip(false); showTooltipButton()">
+                    </i>
+                </h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col mx-2 py-2 tour-guide-text">
+                <span [innerHTML]="tooltipContent.text">
+                </span>
+            </div>
+        </div>
+
+        <div class="row text-center border-top pt-2">
+            <div class="col-1 p-0 pl-2">
+                <i class="la la-chevron-left pointer font-weight-bold text-secondary page-nav"
+                   [title]="'Προηγούμενη σελίδα: ' + (prevPageTitle || prevPageUrl)"
+                   (click)="prevPage()"
+                   *ngIf="(canSkipSteps || !currentStep) && prevPageUrl">
+                </i>
+            </div>
+            <div class="col text-center">
+                <span
+                    class="mx-1 tour-guide-step {{canSkipSteps ? '' : 'no-skip'}} {{i <= currentStep ? 'bg-primary' : ''}}"
+                    (click)="goToStepViaProgress(i)"
+                    *ngFor="let step of steps; let i = index">
+                </span>
+            </div>
+            <div class="col-1 p-0 pr-2">
+                <i class="la la-chevron-right pointer font-weight-bold text-secondary page-nav"
+                   [title]="'Επόμενη σελίδα: ' + (nextPageTitle || nextPageUrl)"
+                   (click)="nextPage()"
+                   *ngIf="(canSkipSteps || currentStep >= steps.length - 1) && nextPageUrl">
+                </i>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="hasProgressBar">
+            <div class="col-1"></div>
+            <div class="progress tour-guide-progress col p-0 mt-2">
+                <div #progress class="progress-bar progress-fill "
+                     role="progressbar"></div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+
+        <div class="row">
+            <div class="col text-right p-2">
+                <app-button *ngIf="canEndTour || currentStep >= steps.length - 1"
+                            color="success"
+                            icon="la-check"
+                            displayName=""
+                            tooltip="Ολοκλήρωση"
+                            (btnClick)="endTour()"
+                            [class]="'btn-sm m-1 pull-left'">
+                </app-button>
+                <app-button color="primary"
+                            icon="la-sync"
+                            displayName=""
+                            tooltip="Επανεκκίνηση περιήγησης"
+                            (btnClick)="startTour()"
+                            [class]="'btn-sm m-1 pull-left'"></app-button>
+                <app-button action="prev"
+                            displayName=""
+                            [title]="prevPageUrl && currentStep <= 0 ? prevPageTitle || prevPageUrl : ''"
+                            [hidden]="currentStep <= 0 && !prevPageUrl"
+                            (btnClick)="currentStep <= 0 && prevPageUrl ? prevPage() : prevStep()"
+                            [class]="'btn-sm m-1'">
+                </app-button>
+                <app-button action="next"
+                            [title]="nextPageUrl && currentStep >= steps.length - 1 ? nextPageTitle || nextPageUrl : ''"
+                            [hidden]="currentStep >= steps.length - 1 && !nextPageUrl"
+                            (btnClick)="currentStep >= steps.length - 1 && nextPageUrl ? nextPage() : nextStep()"
+                            [class]="'btn-sm m-1'">
+                </app-button>
+            </div>
+        </div>
+
+    </div>
+
+</ng-container>
+
+<ul class="tour-guide-dev p-2 rounded" *ngIf="isOngoing && isDevMode">
+    <li (click)="hasBackdrop = !hasBackdrop" class="pointer">
+        hasBackdrop
+        <i class="la" [ngClass]="hasBackdrop ? 'la-check text-success' : 'la-times text-danger'"></i>
+    </li>
+    <li (click)="hasProgressBar = !hasProgressBar; toggleTooltip(visibleTooltip)" class="pointer">
+        hasProgressBar
+        <i class="la" [ngClass]="hasProgressBar ? 'la-check text-success' : 'la-times text-danger'"></i>
+    </li>
+    <li (click)="canSkipSteps = !canSkipSteps" class="pointer">
+        canSkipSteps
+        <i class="la" [ngClass]="canSkipSteps ? 'la-check text-success' : 'la-times text-danger'"></i>
+    </li>
+    <li (click)="canEndTour = !canEndTour" class="pointer">
+        canEndTour
+        <i class="la" [ngClass]="canEndTour ? 'la-check text-success' : 'la-times text-danger'"></i>
+    </li>
+    <li (click)="canEndFromBackdrop = !canEndFromBackdrop" class="pointer">
+        canEndFromBackdrop
+        <i class="la" [ngClass]="canEndFromBackdrop ? 'la-check text-success' : 'la-times text-danger'"></i>
+    </li>
+    <li (click)="canEditSteps = !canEditSteps;" class="pointer">
+        canEditSteps <i class="la" [ngClass]="canEditSteps ? 'la-check text-success' : 'la-times text-danger'"></i>
+    </li>
+</ul>
+
+<app-modal #shortcutsModal
+           class="tour-guide-shortcuts"
+           headerTitle="Συντομεύσεις πληκτρολογίου">
+    <ng-container body>
+        <div>
+            <div>
+                <b>Tab / Ctrl + Βελάκι-δεξιά:</b>
+            </div>
+            <span>Επόμενο βήμα</span>
+            <br><br>
+            <div>
+                <b>Shift + Tab / Ctrl + Βελάκι-αριστερά:</b>
+            </div>
+            <span>Προηγούμενο βήμα</span><br><br>
+            <div>
+                <b>Ctrl + q:</b>
+            </div>
+            <span>Απόκρυψη / εμφάνιση οδηγιών βήματος</span><br><br>
+            <div>
+                <b>Ctrl + r:</b>
+            </div>
+            <span>Επανεκκίνηση περιήγησης</span><br><br>
+            <div>
+                <b>Escape:</b>
+            </div>
+            <span>Έξοδος από την περιήγηση (μόνο εάν το κουμπί 'Τέλος' είναι εμφανές)</span><br><br>
+        </div>
+    </ng-container>
+</app-modal>
+
