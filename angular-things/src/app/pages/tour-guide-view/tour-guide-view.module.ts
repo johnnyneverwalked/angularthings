@@ -11,7 +11,7 @@ const routes: Route[] = [
     path: "",
     component: TourGuideViewComponent
   }
-]
+];
 
 @NgModule({
   declarations: [TourGuideViewComponent],

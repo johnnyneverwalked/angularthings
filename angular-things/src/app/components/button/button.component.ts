@@ -76,7 +76,7 @@ export class ButtonComponent implements OnInit {
       tooltip: "Delete",
       icon: "la-trash"
     },
-  }
+  };
 
   @Input() displayName: string = null;
   @Input() icon: string = null;
@@ -128,4 +128,4 @@ export class ButtonComponent implements OnInit {
 
 }
 
-type ButtonActions = "next"|"prev"|"close"|"cancel"|"warning"|"help"|"shortcuts"|"view"|"save"|"edit"|"delete"
+type ButtonActions = "next"|"prev"|"close"|"cancel"|"warning"|"help"|"shortcuts"|"view"|"save"|"edit"|"delete";

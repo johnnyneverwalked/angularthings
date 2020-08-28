@@ -12,8 +12,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o --port=4300",
-    "build": "npm run tslint && npm run ng -- build",
-    "build-gh": "npm run ng build --prod --base-href angularthings && npm run ngh",
+    "build": "npm run lint && npm run ng -- build",
+    "publish": "npm run ng build --prod --base-href=/angularthings/ && npm run ngh --dir=dist/angular-things",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

@@ -13,7 +13,7 @@ const routes: Route[] = [
     path: "",
     component: GridViewComponent
   }
-]
+];
 
 
 @NgModule({

@@ -25,7 +25,7 @@ export class UrlShortcutComponent implements OnInit, AfterViewInit, OnDestroy {
     public form: FormGroup;
     public loading: boolean = false;
     public ellipsisColor: string = null;
-    public radioColors = [] = RADIO_COLORS
+    public radioColors = [] = RADIO_COLORS;
 
     private serializer: CustomUrlSerializer;
 
@@ -39,7 +39,7 @@ export class UrlShortcutComponent implements OnInit, AfterViewInit, OnDestroy {
         private cd: ChangeDetectorRef,
         public appComponent: AppComponent
     ) {
-      this.serializer = new CustomUrlSerializer()
+      this.serializer = new CustomUrlSerializer();
     }
 
     ngOnInit() {

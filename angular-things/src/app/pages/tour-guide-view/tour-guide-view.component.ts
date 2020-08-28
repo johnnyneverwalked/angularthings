@@ -8,7 +8,7 @@ import {ITourGuideStep} from "../../interfaces/ITourGuide";
 })
 export class TourGuideViewComponent {
 
-  showStep5: boolean = false
+  showStep5: boolean = false;
   tourSteps: ITourGuideStep[] = [
     {
       title: "Tour Guide Demo",
@@ -74,7 +74,7 @@ export class TourGuideViewComponent {
       title: "Demo end",
       text: " \"<i>People want guidance, not rhetoric. They need to know what the plan of action is, and how it will be implemented. They want to be given responsibility to help solve the problem and authority to act on it.</i>\" \n \n ~ Howard Schultz"
     }
-  ]
+  ];
 
   constructor() {
   }
