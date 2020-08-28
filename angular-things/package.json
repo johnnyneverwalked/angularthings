@@ -13,6 +13,7 @@
     "ng": "ng",
     "start": "ng serve -o --port=4300",
     "build": "npm run tslint && npm run ng -- build",
+    "build-gh": "npm run ng build --prod --base-href angularthings && npm run ngh",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -32,8 +33,13 @@
     "@ngrx/store": "^10.0.0",
     "@nicky-lenaers/ngx-scroll-to": "^9.0.0",
     "bootstrap": "^4.5.2",
+    "dragselect": "^1.13.1",
+    "hammerjs": "^2.0.8",
     "jquery": "^3.5.1",
     "line-awesome": "^1.3.0",
+    "lodash": "^4.17.20",
+    "muuri": "^0.8.0",
+    "ngx-spinner": "^10.0.1",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

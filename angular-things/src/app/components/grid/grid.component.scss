@@ -1,0 +1,65 @@
+.grid {
+    position: relative;
+    max-width: 100%;
+    min-width: 100%;
+}
+
+.grid-edit {
+    border: dashed lightgray;
+}
+
+.grid-edit-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.grid-main {
+    min-height: 500px;
+}
+
+.grid-container {
+    overflow: auto !important;
+    max-height: 100%;
+    min-width: 220px;
+    padding: 3px 3px 3px 8px;
+    background-color: rgba(239, 239, 239, 0.8);
+    box-shadow: -1px 1px 16px 2px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+    position: absolute;
+    right: 0;
+    top: 25%;
+}
+
+.edit-label {
+    position: absolute;
+    z-index: 5;
+    top: 0;
+    right: 0;
+    user-select: none;
+}
+
+.drag-select {
+    background-color: #ff790f;
+    border: 1px solid #862718;
+    position: absolute;
+    opacity: 0.3;
+    z-index: 5;
+}
+
+.recycle-bin {
+    position: absolute;
+    bottom: -75px;
+    z-index: 5;
+    left: 10px;
+    user-select: none;
+    &:hover {
+        transition: color 200ms ease;
+        color: indianred !important;
+    }
+    & span {
+        position: relative;
+        left: -12px;
+    }
+}
+

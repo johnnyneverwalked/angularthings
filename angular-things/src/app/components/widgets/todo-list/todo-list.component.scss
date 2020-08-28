@@ -1,0 +1,44 @@
+.todo-list {
+    position: relative;
+    overflow-y: auto;
+    height: calc(100% - 50px)!important;
+    overflow-x: hidden;
+    border-radius: 0 0 5px 5px;
+}
+.todo-header {
+    height: 50px;
+    border-radius: 5px 5px 0 0;
+}
+.todo-item {
+    position: absolute;
+    width: 100%;
+    margin: 2px 0;
+    padding: 3px;
+}
+.todo-item.muuri-item-dragging {
+    z-index: 3;
+}
+.todo-item.muuri-item-releasing {
+    z-index: 2;
+}
+.todo-item.muuri-item-hidden {
+    z-index: 0;
+}
+.todo-item-content {
+    position: relative;
+    border-radius: 4px;
+    cursor: move;
+    padding: 5px;
+    background-color: white;
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2);
+}
+
+.comment-bubble {
+    z-index: 10;
+    overflow: hidden;
+    & .comment-body {
+        max-height: 200px;
+        overflow-y: auto;
+    }
+}

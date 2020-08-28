@@ -1,0 +1,46 @@
+<div class="todo-header text-white text-center bg-success w-100 position-relative py-2">
+    <i class="la la-cogs pull-right la-2x mx-2"></i>
+    <h5 class="d-inline">Today's Tasks</h5>
+</div>
+<div class="todo-list w-100 bg-light px-2" #todoList>
+    <div class="todo-item" *ngFor="let task of tasks">
+        <div class="todo-item-content">
+            <div class="row">
+                <div class="col">
+                    <b>12:00</b>
+                </div>
+                <div class="col">
+                   <span [title]="task.name.length > NORMAL_LENGTH ? task.name : ''">
+                       {{task.name.slice(0, NORMAL_LENGTH)}}
+                       {{task.name.length > NORMAL_LENGTH ? '...' : ''}}
+                   </span>
+                    <div *ngIf="task.comment">
+                        <i class="la la-comments pointer" (click)="currentComment = task.comment"></i>
+                    </div>
+                </div>
+                <div class="col text-right font-weight-bold">
+                    <i class="la la-2x la-{{task.action?.icon}} text-{{task.action?.color}}"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div [@slideRight]="currentComment?.length ? 'visible' : 'invisible'" class="bg-secondary h-100 comment-bubble">
+        <div class="row p-0 m-0">
+            <div class="col-10 px-3 py-1 text-white">
+                <h5>Comment</h5>
+            </div>
+            <div class="col-2 py-1 text-white">
+                <i class="la la-times la-2x pointer pull-right" (click)="currentComment = null"></i>
+            </div>
+        </div>
+        <div class="row px-4">
+            <div class="col-12 p-3 m-1 bg-light border-radius comment-body">
+                <span>{{currentComment}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

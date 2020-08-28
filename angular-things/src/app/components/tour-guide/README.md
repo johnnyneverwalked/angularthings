@@ -107,11 +107,11 @@ It must also be marked with the `tourGuide` directive. A step can contain the fo
 <div tourGuide *ngIf="showStep5" id="step5">
     This is the 5th step
 </div>
+<div tourGuide id="step9">
+    This is the 9th step
+</div>
 <div tourGuide id="step8">
     This is the 8th step
-</div>
-<div tourGuide id="step7">
-    This is the 7th step
 </div>
 ...
 ```
@@ -171,13 +171,13 @@ tourSteps: ITourGuideStep[] = [
         text: "This appears in the center of the screen since it is not tied to an element.",
     },
     {
-        id: "step7",
+        id: "step8",
         title: "Events",
         text: "When the tour starts, ends or the page is changed, an event is emitted with relevant information of the TourGuide's " +
             "state at the time."
     },
     {
-        id: "step8",
+        id: "step9",
         title: "Demo end",
         text: " \"<i>People want guidance, not rhetoric. They need to know what the plan of action is, and how it will be implemented. They want to be given responsibility to help solve the problem and authority to act on it.</i>\" \n \n ~ Howard Schultz"
     }

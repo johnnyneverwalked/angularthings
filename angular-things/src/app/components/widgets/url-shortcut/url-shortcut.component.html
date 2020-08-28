@@ -1,0 +1,67 @@
+<button class="btn btn-block btn-{{color || 'light'}} h-100"
+        (click)="navigate($event.ctrlKey)"
+        (auxclick)="navigate(true)">
+    <i class="la {{icon || 'la-keyboard'}} mr-1"></i>{{displayName || 'Custom shortcut'}}
+    <app-loader [loading]="loading" type="square-loader"></app-loader>
+</button>
+<app-button class="edit-btn" [ngClass]="ellipsisColor" icon="la-ellipsis-v" displayName="" (btnClick)="editModal.show()">
+</app-button>
+<app-modal #editModal
+           headerTitle="Edit Shortcut">
+    <ng-container body [formGroup]="form">
+
+        <div class="row form-group">
+            <div class="col-sm-3">
+                <label for="displayName" class="col-form-label">Shortcut name</label>
+            </div>
+            <div class="col-sm-6 input-group">
+                <input id="displayName" class="form-control" formControlName="displayName">
+            </div>
+        </div>
+        <div class="row form-group pb-4 border-bottom">
+            <div class="col-sm-3">
+                <label for="navigationUrl" class="col-form-label">Shortcut url</label>
+            </div>
+            <div class="col-sm-6 input-group">
+                <input id="navigationUrl" class="form-control" formControlName="navigationUrl" placeholder="e.g.: http://localhost:4200/orders">
+            </div>
+        </div>
+        <div class="row form-group pb-4 border-bottom">
+            <div class="col-sm-3">
+                <label for="icon" class="col-form-label">Shortcut icon</label>
+            </div>
+            <div class="col-sm-6 input-group">
+                <input id="icon" class="form-control" formControlName="icon" placeholder="Line-awesome icon (e.g. 'la-eye')">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-3">
+                <label class="col-form-label">Shortcut color</label>
+            </div>
+            <div class="col-sm">
+              <div class="form-check form-check-inline mr-4" *ngFor="let color of radioColors">
+                <input class="form-check-input bg-{{color.value}}" type="radio"
+                       [value]="color.value" formControlName="color" [name]="'color'" [id]="color.value">
+                <label class="form-check-label">{{color.label}}</label>
+              </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-3">
+                <label class="col-form-label">Shortcut size</label>
+            </div>
+            <div class="col-sm">
+              <div class="form-check form-check-inline mr-4" *ngFor="let size of [{value: 'widget-sm', label: 'Small'}, {value: '', label: 'Big'}]">
+                <input class="form-check-input" type="radio"
+                       [value]="size.value" formControlName="size" [name]="'size'" [id]="size.value">
+                <label class="form-check-label">{{size.label}}</label>
+              </div>
+            </div>
+        </div>
+    </ng-container>
+  <ng-container footer>
+    <div class="col text-right">
+      <app-button action="save" (btnClick)="editSave(); editModal.hide()"></app-button>
+    </div>
+  </ng-container>
+</app-modal>

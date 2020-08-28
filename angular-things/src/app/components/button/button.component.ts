@@ -36,7 +36,7 @@ export class ButtonComponent implements OnInit {
       icon: "la-question-circle"
     },
     shortcuts: {
-      color: "btn-light btn-sm border",
+      color: "btn-light border",
       displayName: "Shortcuts",
       tooltip: "Shortcuts",
       icon: "la-keyboard-o"
@@ -57,6 +57,24 @@ export class ButtonComponent implements OnInit {
       displayName: "View",
       tooltip: "View",
       icon: "la-eye"
+    },
+    save: {
+      color: "success",
+      displayName: "Save",
+      tooltip: "Save",
+      icon: "la-save",
+    },
+    edit: {
+      color: "primary",
+      displayName: "Edit",
+      tooltip: "Edit",
+      icon: "la-save",
+    },
+    delete: {
+      color: "danger",
+      displayName: "Delete",
+      tooltip: "Delete",
+      icon: "la-trash"
     },
   }
 
@@ -103,11 +121,11 @@ export class ButtonComponent implements OnInit {
     if (this.color === null || force) {
       this.color = this.color ? this.color : button.color;
     }
-    if ((this.tooltip === null && !this.displayName)) {
+    if ((this.tooltip === null && this.displayName === "")) {
       this.tooltip = button.tooltip;
     }
   }
 
 }
 
-type ButtonActions = "next"|"prev"|"close"|"cancel"|"warning"|"help"|"shortcuts"|"view"
+type ButtonActions = "next"|"prev"|"close"|"cancel"|"warning"|"help"|"shortcuts"|"view"|"save"|"edit"|"delete"

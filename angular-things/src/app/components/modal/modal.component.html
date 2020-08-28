@@ -1,7 +1,7 @@
 <div class="app-modal-wrapper" *ngIf="opened">
   <div class="app-modal">
     <div class="app-modal-backdrop" (click)="onBackdropClose()"></div>
-    <div [@emerge] class="app-modal-content shadow d-flex flex-column justify-content-between"
+    <div [@fade] class="app-modal-content shadow d-flex flex-column justify-content-between"
          [ngStyle]="{'min-width': '600px'}"
          [class.full-width]="fullWidth"
          [class.full-height]="fullHeight">
@@ -15,7 +15,7 @@
             <ng-content select="[header]"></ng-content>
           </div>
           <div class="flex-shrink-1" *ngIf="hasClose">
-<!--            <app-button action="close" (btnClick)="onClose()"></app-button>-->
+            <app-button action="close" displayName="" (btnClick)="hide()"></app-button>
           </div>
         </div>
       </div>

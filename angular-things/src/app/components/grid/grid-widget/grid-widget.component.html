@@ -1,0 +1,8 @@
+<div class="widget" #widget [ngClass]="class">
+    <div class="widget-content" [ngClass]="{shadow: !empty}" [ngStyle]="style">
+        <div class="widget-backdrop"></div>
+        <span class="empty-msg" *ngIf="empty">Empty Space</span>
+        <i *ngIf="active" class="la la-trash delete-btn" (click)="delete.emit(widgetElement.nativeElement)"></i>
+        <ng-template gridHost></ng-template>
+    </div>
+</div>

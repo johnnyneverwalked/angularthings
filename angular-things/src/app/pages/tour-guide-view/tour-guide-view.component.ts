@@ -12,7 +12,8 @@ export class TourGuideViewComponent {
   tourSteps: ITourGuideStep[] = [
     {
       title: "Tour Guide Demo",
-      text: "This is a demo for the TourGuide Component. In dev mode you can change the inputs on the fly from the menu on the top right."
+      text: "This is a demo for the TourGuide Component. In dev mode you can change the inputs on the fly from the menu" +
+        " on the bottom right of the screen."
     },
     {
       id: "step2",
@@ -62,14 +63,14 @@ export class TourGuideViewComponent {
       text: "This appears in the center of the screen since it is not tied to an element.",
     },
     {
-      id: "step7",
+      id: "step8",
       title: "Events",
       text: "When the tour starts, ends or the page is changed, an event is emitted with relevant information of the TourGuide's " +
         "state at the time. Also by adding the 'tourguide=true' param in the url for a page that contains a TourGuide component, the tour will start automatically." +
         " This is very useful if you wish to link TourGuides in different pages together to form a big tour."
     },
     {
-      id: "step8",
+      id: "step9",
       title: "Demo end",
       text: " \"<i>People want guidance, not rhetoric. They need to know what the plan of action is, and how it will be implemented. They want to be given responsibility to help solve the problem and authority to act on it.</i>\" \n \n ~ Howard Schultz"
     }

@@ -51,6 +51,7 @@ export class TourGuideComponent implements OnInit, OnDestroy, AfterViewInit {
     @Input() canEndTour: boolean = true;
     @Input() canEndFromBackdrop: boolean = false;
     @Input() hasProgressBar: boolean = false;
+    @Input() showDev: boolean = true;
     @Input() prevPageUrl: string;
     @Input() prevPageTitle: string;
     @Input() nextPageUrl: string;

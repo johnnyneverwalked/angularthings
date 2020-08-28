@@ -1,0 +1,98 @@
+<div *ngIf="enableEdit" class="my-2 text-right">
+        <app-button *ngIf="!isEditable()"
+                    action="edit"
+                    class="grid-edit-button btn-lg"
+                    icon="la-cog"
+                    displayName=""
+                    id="gear-button"
+                    tourGuide
+                    (btnClick)="editLayout(true)">
+        </app-button>
+
+        <app-button *ngIf="isEditable()"
+                    action="save"
+                    class="grid-edit-button btn-lg float-left"
+                    displayName=""
+                    id="save-button"
+                    tourGuide
+                    (btnClick)="editLayout(false)">
+        </app-button>
+
+        <app-button *ngIf="isEditable()"
+                    class="ml-2"
+                    action="cancel"
+                    icon="la-times"
+                    (btnClick)="resetLayout()">
+        </app-button>
+
+        <app-button *ngIf="isEditable()"
+                    class="float-left"
+                    action="save"
+                    (btnClick)="editLayout(false)">
+        </app-button>
+
+        <app-button *ngIf="isEditable()"
+                    [class]="'ml-2'"
+                    action="help"
+                    displayName="Select all"
+                    i18n-displayName
+                    icon="la-cubes"
+                    (btnClick)="selectAll()">
+        </app-button>
+
+        <app-button *ngIf="isEditable()"
+                    [class]="'ml-2'"
+                    action="delete"
+                    displayName="Delete selected"
+                    i18n-displayName
+                    (btnClick)="setItemsAsRemoved()">
+        </app-button>
+
+        <app-button *ngIf="isEditable() && !showAvailableWidgets"
+                    action="save"
+                    [class]="'ml-2'"
+                    displayName="Add widget"
+                    icon="la-cube"
+                    i18n-displayName
+                    id="grid-add-widget"
+                    tourGuide
+                    (btnClick)="showAvailable()">
+        </app-button>
+
+        <app-button *ngIf="isEditable() && showAvailableWidgets"
+                    action="save"
+                    [class]="'ml-2'"
+                    displayName="Close menu"
+                    icon="la-times"
+                    i18n-displayName
+                    (btnClick)="hideAvailable()">
+        </app-button>
+    </div>
+
+<div class="grid grid-main" #mainGrid [ngClass]="isEditable() ? 'grid-edit' : null" id="grid-main-template" tourGuide>
+    <div class="drag-select" [hidden]="!isEditable()" id="drag-select"></div>
+    <app-loader [loading]="loading" color="purple" type="square-loader"></app-loader>
+    <span *ngIf="isEditable()" class="mr-1 edit-label"><i class="la la-edit"></i>Edit Mode</span>
+</div>
+<div class="p-0 m-0 recycle-bin text-lightgrey" tourGuide id="recycle-bin" *ngIf="isEditable()">
+    <i #trash
+       title="Drag widgets here to delete them"
+       i18n-title
+       class="la la-trash la-5x">
+    </i>
+    <span *ngIf="deletedItems.length"
+          title="{{deletedItems.length}} deleted widgets"
+          i18n-title
+          class="font-weight-bold">
+        {{deletedItems.length}}
+    </span>
+</div>
+
+<div #host>
+    <ng-template gridHost></ng-template>
+</div>
+
+<div [hidden]="hideMenu || !showAvailableWidgets" #availableContainer [ngStyle]="{'transition': '.5 display ease-in-out'}" class="grid-container my-2" id="grid-available-widgets"
+     tourGuide>
+    <div #availableWidgetsGrid class="grid custom-scroller horizontal-scrollbar"></div>
+</div>

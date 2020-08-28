@@ -7,7 +7,7 @@
                     action="view"
                     displayName=""
                     icon="la-comment"
-                    title="Εμφάνιση οδηγιών"
+                    title="Show instructions"
                     (btnClick)="toggleTooltip(true, true)"
                     *ngIf="visibleTooltipButton">
         </app-button>
@@ -17,7 +17,7 @@
                 displayName=""
                 icon="la-keyboard"
                 class="tour-guide-shortcuts"
-                title="Συντομέυσεις"
+                title="Shortcuts"
                 (btnClick)="shortcutsModal.show()">
     </app-button>
 
@@ -41,8 +41,8 @@
             <div class="col-12">
                 <h4 class="font-weight-bold m-0">
                     <span [innerHTML]="tooltipContent.title"></span>
-                    <i class="float-right la la-minus font-weight-bold pointer"
-                       title="Απόκρυψη οδηγιών"
+                    <i class="float-right la la-minus font-weight-bold cursor-pointer"
+                       title="Hide instructions"
                        (click)="toggleTooltip(false); showTooltipButton()">
                     </i>
                 </h4>
@@ -59,7 +59,7 @@
         <div class="row text-center border-top pt-2">
             <div class="col-1 p-0 pl-2">
                 <i class="la la-chevron-left pointer font-weight-bold text-secondary page-nav"
-                   [title]="'Προηγούμενη σελίδα: ' + (prevPageTitle || prevPageUrl)"
+                   [title]="'Previous page: ' + (prevPageTitle || prevPageUrl)"
                    (click)="prevPage()"
                    *ngIf="(canSkipSteps || !currentStep) && prevPageUrl">
                 </i>
@@ -73,7 +73,7 @@
             </div>
             <div class="col-1 p-0 pr-2">
                 <i class="la la-chevron-right pointer font-weight-bold text-secondary page-nav"
-                   [title]="'Επόμενη σελίδα: ' + (nextPageTitle || nextPageUrl)"
+                   [title]="'Next page: ' + (nextPageTitle || nextPageUrl)"
                    (click)="nextPage()"
                    *ngIf="(canSkipSteps || currentStep >= steps.length - 1) && nextPageUrl">
                 </i>
@@ -95,14 +95,14 @@
                             color="success"
                             icon="la-check"
                             displayName=""
-                            tooltip="Ολοκλήρωση"
+                            tooltip="Finish tour"
                             (btnClick)="endTour()"
                             [class]="'btn-sm m-1 pull-left'">
                 </app-button>
                 <app-button color="primary"
                             icon="la-sync"
                             displayName=""
-                            tooltip="Επανεκκίνηση περιήγησης"
+                            tooltip="Restart tour"
                             (btnClick)="startTour()"
                             [class]="'btn-sm m-1 pull-left'"></app-button>
                 <app-button action="prev"
@@ -125,7 +125,7 @@
 
 </ng-container>
 
-<ul class="tour-guide-dev p-2 rounded" *ngIf="isOngoing && isDevMode">
+<ul class="tour-guide-dev p-2 rounded" *ngIf="isOngoing && isDevMode && showDev">
     <li (click)="hasBackdrop = !hasBackdrop" class="pointer">
         hasBackdrop
         <i class="la" [ngClass]="hasBackdrop ? 'la-check text-success' : 'la-times text-danger'"></i>
@@ -152,31 +152,32 @@
 </ul>
 
 <app-modal #shortcutsModal
+           [hasFooter]="false"
            class="tour-guide-shortcuts"
-           headerTitle="Συντομεύσεις πληκτρολογίου">
+           headerTitle="Tour Guide shortcuts">
     <ng-container body>
         <div>
             <div>
-                <b>Tab / Ctrl + Βελάκι-δεξιά:</b>
+                <b>Tab / Ctrl + right arrow:</b>
             </div>
-            <span>Επόμενο βήμα</span>
+            <span>Next step</span>
             <br><br>
             <div>
-                <b>Shift + Tab / Ctrl + Βελάκι-αριστερά:</b>
+                <b>Shift + Tab / Ctrl + left arrow:</b>
             </div>
-            <span>Προηγούμενο βήμα</span><br><br>
+            <span>Previous step</span><br><br>
             <div>
                 <b>Ctrl + q:</b>
             </div>
-            <span>Απόκρυψη / εμφάνιση οδηγιών βήματος</span><br><br>
+            <span>Hide / show step tooltip</span><br><br>
             <div>
                 <b>Ctrl + r:</b>
             </div>
-            <span>Επανεκκίνηση περιήγησης</span><br><br>
+            <span>Restart tour</span><br><br>
             <div>
                 <b>Escape:</b>
             </div>
-            <span>Έξοδος από την περιήγηση (μόνο εάν το κουμπί 'Τέλος' είναι εμφανές)</span><br><br>
+            <span>End tour (only if the green check button is visible)</span><br><br>
         </div>
     </ng-container>
 </app-modal>

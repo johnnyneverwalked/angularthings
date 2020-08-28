@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
+import {NotFoundComponent} from "./pages/not-found/not-found.component";
 
 const routes: Routes = [
   {
@@ -11,9 +12,19 @@ const routes: Routes = [
         data: {
           breadcrumb: "Tour Guide"
         }
+      },
+      {
+        path: "grid",
+        loadChildren: () => import("./pages/grid-view/grid-view.module").then(m => m.GridViewModule),
+        data: {
+          breadcrumb: "Grid"
+        }
       }
     ]
-  }
+  },
+  {path: "**", component: NotFoundComponent}
+
+
 ];
 
 @NgModule({

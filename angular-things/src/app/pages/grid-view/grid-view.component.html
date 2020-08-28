@@ -1,0 +1,47 @@
+<app-grid #grid></app-grid>
+
+<app-tour-guide #guide
+                [steps]="tourGuideSteps"
+                [showDev]="false"
+                [canEndFromBackdrop]="true"
+                [canEditSteps]="canEditSteps"
+                [canSkipSteps]="false"
+                [canEndTour]="true"
+                (tourEnded)="tourEnd()"
+>
+</app-tour-guide>
+
+<div class="help-container">
+  <app-button action="help" (btnClick)="startTour()"></app-button>
+  <app-button action="shortcuts" [class]="'ml-1'" (btnClick)="shortcutsModal.show()"></app-button>
+</div>
+
+<app-modal #shortcutsModal
+           [hasFooter]="false"
+           headerTitle="Grid shortcuts">
+  <ng-container body>
+    <div>
+      <div>
+        <b>Double click on a widget:</b>
+      </div>
+      <span>Select widget</span>
+      <br><br>
+      <div>
+        <b>Ctrl / Shift + click on a widget:</b>
+      </div>
+      <span>Mass select widgets</span><br><br>
+      <div>
+        <b>Ctrl + Α:</b>
+      </div>
+      <span>Select all</span><br><br>
+      <div>
+        <b>Del:</b>
+      </div>
+      <span>Delete selected widgets</span><br><br>
+      <div>
+        <b>click + drag cursor:</b>
+      </div>
+      <span>Mass select widgets</span><br><br>
+    </div>
+  </ng-container>
+</app-modal>

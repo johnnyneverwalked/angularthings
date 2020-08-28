@@ -1,23 +1,23 @@
 <div class="row mt-5 pt-5">
-  <div class="col-12 text-center">
+  <div class="col-6 offset-3 my-3 text-center">
     <div tourGuide id="step6" class="d-inline-block">
       This is the 6th step
     </div>
   </div>
-  <div class="col-12 text-center">
+  <div class="col-6 offset-3 my-3 text-center">
 
     <div tourGuide id="step2">
       This is the 2nd step
     </div>
   </div>
-  <div class="col-12 text-center">
+  <div class="col-6 offset-3 my-3 text-center">
 
     <div tourGuide id="step3">
       This is the 3rd step
       <input type="text" class="form-control">
     </div>
   </div>
-  <div class="col-12 text-center">
+  <div class="col-6 offset-3 my-3 text-center">
 
     <div tourGuide id="step4">
       This is the 4th step
@@ -25,21 +25,21 @@
       <app-button action="warning" displayName="Test button"></app-button>
     </div>
   </div>
-  <div class="col-12 text-center">
+  <div class="col-6 offset-3 my-3 text-center">
 
     <div tourGuide *ngIf="showStep5" class="font-weight-bold" id="step5">
       This is the 5th step
     </div>
   </div>
-  <div class="col-12 text-center">
+  <div class="col-6 offset-3 my-3 text-center">
 
-    <div tourGuide id="step8">
-      This is the 8th step
+    <div tourGuide id="step9">
+      This is the 9th step
     </div>
   </div>
-  <div class="col-12 text-center">
-    <div tourGuide id="step7">
-      This is the 7th step
+  <div class="col-6 offset-3 my-3 text-center">
+    <div tourGuide id="step8">
+      This is the 8th step
     </div>
   </div>
   <div class="col text-right">
@@ -49,6 +49,7 @@
 
 <app-tour-guide #guide
                 [steps]="tourSteps"
+                [canEndFromBackdrop]="true"
                 [hasProgressBar]="true"
                 (tourEnded)="doStuffOnTourEnd($event)">
 </app-tour-guide>

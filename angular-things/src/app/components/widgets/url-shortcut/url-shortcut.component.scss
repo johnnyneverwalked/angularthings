@@ -1,0 +1,25 @@
+
+.edit-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0;
+
+    &.text-white {
+        ::ng-deep {
+            i {
+                color: white;
+                font-weight: bold;
+            }
+        }
+    }
+
+    &.text-black {
+        ::ng-deep {
+            i {
+                color: black;
+                font-weight: bold;
+            }
+        }
+    }
+}
