@@ -114,3 +114,31 @@
   -ms-transition: all .1s ease;
   transition: all .1s ease;
 }
+
+.gradient-animation {
+  background: linear-gradient(60deg, #9116de, #e396ec, #17a2b8, #1b55cb);
+  animation: gradient 10s ease infinite;
+  background-size: 800% 400%;
+}
+@-webkit-keyframes gradient{
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+@keyframes gradient{
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}

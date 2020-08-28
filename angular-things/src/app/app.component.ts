@@ -10,7 +10,7 @@ export class AppComponent implements OnInit{
   title = 'angular-things';
   menu: {path: string; name: string; icon: string, params?: any}[] = [
     {path: "/tour-guide", name: "Tour Guide", icon: "la-map-signs", params: {tourguide: true}},
-    {path: "/grid", name: "Widget Grid", icon: "la-cubes", params: {tourguide: true}}
+    {path: "/grid", name: "Widget Grid", icon: "la-cubes"}
   ];
 
   constructor(
