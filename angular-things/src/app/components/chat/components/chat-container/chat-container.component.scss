@@ -1,0 +1,20 @@
+.chat-container {
+    bottom: 0;
+    right: 10px;
+    z-index: 100;
+}
+
+.more-chats {
+    height: 35px;
+    width: 50px;
+}
+
+.list-menu {
+    max-height: 150px;
+    overflow-y: auto;
+
+    & .la-times-circle:hover {
+        color: red;
+        transition: all .2s ease;
+    }
+}

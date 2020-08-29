@@ -28,8 +28,11 @@ export class GridViewComponent {
   public tourSteps(): void {
     this.tourGuideSteps = [
       {
-        title: "Grid setup",
-        text: "A step by step guide on how to use the grid and add widgets."
+        title: "Grid Demo",
+        text: "A step by step guide on how to use the grid and add widgets. " +
+          "Grid uses the Muuri layout engine as its base, but it extends its functionality to support dynamic widgets." +
+          " For this reason any component can become a widget since Grid creates them dynamically at runtime using Angular's ComponentFactory. " +
+          "For the demo, I've created three simple widgets to demonstrate this feature."
       },
       {
         id: "gear-button",

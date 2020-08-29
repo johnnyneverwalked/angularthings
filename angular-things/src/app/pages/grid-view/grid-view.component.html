@@ -1,3 +1,10 @@
+
+<div class="row mb-5">
+  <div class="col text-right">
+    <app-button action="help" (btnClick)="startTour()"></app-button>
+    <app-button action="shortcuts" [class]="'ml-1'" (btnClick)="shortcutsModal.show()"></app-button>
+  </div>
+</div>
 <app-grid #grid></app-grid>
 
 <app-tour-guide #guide
@@ -11,15 +18,12 @@
 >
 </app-tour-guide>
 
-<div class="help-container">
-  <app-button action="help" (btnClick)="startTour()"></app-button>
-  <app-button action="shortcuts" [class]="'ml-1'" (btnClick)="shortcutsModal.show()"></app-button>
-</div>
 
 <app-modal #shortcutsModal
            [hasFooter]="false"
            headerTitle="Grid shortcuts">
   <ng-container body>
+    <p class="border-bottom pb-2">These shortcuts only work in edit mode. You can enter edit mode by pressing the cog button at the bottom right of the screen.</p>
     <div>
       <div>
         <b>Double click on a widget:</b>

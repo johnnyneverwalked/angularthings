@@ -1,0 +1,16 @@
+<span *ngFor="let seen of (messageSeen | orderBy:'-date') | filterBy:['notYet']:showNotYet"
+      container="body"
+      placement="left"
+      [openDelay]="250"
+      [ngbTooltip]="seen.notYet ? ((seen.user?._id || seen.user) === site.currentUser._id ? notYetYouTemplate:notYetTemplate) : seenTemplate">
+    <app-user-info [user]="seen.user"
+                   [style.opacity]="seen.notYet ? .25 : 1"
+                   [gravatarSize]="12"
+                   [hideName]="true"
+                   [isChattable]="false"
+                   [showGravatar]="true">
+    </app-user-info>
+    <ng-template #seenTemplate><span i18n>Διαβάστηκε</span> {{(seen.date | date:"yyyy-MM-dd HH:mm") | amTimeAgo}}</ng-template>
+    <ng-template #notYetTemplate>Δεν διαβάστηκε ακόμη</ng-template>
+    <ng-template #notYetYouTemplate>Δεν το διαβάσατε ακόμη</ng-template>
+</span>

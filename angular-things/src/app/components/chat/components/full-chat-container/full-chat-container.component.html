@@ -1,0 +1,16 @@
+<div class="container-fluid" [ngStyle]="{height: (height || 600) + 'px'}">
+    <div class="row h-100">
+        <div class="col-9 h-100">
+            <app-chat *ngIf="topic" aspect="full" [topic]="topic"></app-chat>
+        </div>
+        <div class="col border-radius p-3 bg-white h-100 custom-scroller horizontal-scrollbar overflow-auto">
+            <h3 class="font-weight-bold" title="Conversations" ></h3>
+            <div class="row">
+                <div class="col form-group">
+                  <input type="text" [(ngModel)]="search" placeholder="Search conversations...">
+                </div>
+            </div>
+            <app-chat-list [userChats]="userChats"></app-chat-list>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="d-flex align-items-end position-fixed chat-container" *ngIf="site.showChatContainer.getValue()">
+    <div class="d-inline-block pointer p-1 more-chats border-radius-top bg-lightgrey text-center"
+         ngbDropdown placement="top-left"
+         *ngIf="activeChats.length > maxChats">
+        <button class="btn p-0" ngbDropdownToggle>
+            <i class="la la-comments"></i>
+        </button>
+        <div ngbDropdownMenu>
+            <ul class="list-unstyled m-0 list-menu">
+                <li class="dropdown-item"
+                    [class.font-weight-bold]="chat.newMessage"
+                    (click)="showChat(i)"
+                    [hidden]="i < maxChats" ngbDropdownItem *ngFor="let chat of activeChats; let i = index">
+                    <i class="mr-1 la la-times-circle" (click)="closeChat($event, i)"></i>
+                    <span class="mr-2">{{chat.name || chat.topic?.split('-')[1]}}</span>
+                    <ng-container *ngIf="chat.subs?.length">
+                      <ng-container *ngFor="let sub of chat.subs; let l = last">
+                        <app-user-info *ngIf="!l"
+                                       [showGravatar]="true"
+                                       [hideName]="true"
+                                       [isChattable]="false"
+                                       [user]="sub">
+                        </app-user-info>
+                      </ng-container>
+                        <span class="ml-1"
+                              *ngIf="chat.subs[chat.subs.length - 1] - chat.subs.length >= 0">
+                            +{{chat.subs[chat.subs.length - 1] - chat.subs.length + 1}} more
+                        </span>
+                    </ng-container>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="d-inline-block ml-2" *ngFor="let chat of activeChats; let i = index">
+        <app-chat [hidden]="i >= maxChats"
+                  (click)="markAsRead(i)"
+                  [topic]="chat.topic"
+                  #chat>
+        </app-chat>
+    </div>
+</div>

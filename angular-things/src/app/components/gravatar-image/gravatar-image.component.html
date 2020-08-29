@@ -1,0 +1,9 @@
+<img *ngIf="value"
+     ngxGravatar
+     class="mb-1 mr-2"
+     [size]="size"
+     [preferGravatar]="true"
+     [email]="value"
+     [src]="'https://api.adorable.io/avatars/30/' + value + '.png'"
+     [ratio]="ratio"
+/>

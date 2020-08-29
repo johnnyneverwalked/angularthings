@@ -1,0 +1,61 @@
+
+@import "src/app/scss/colors";
+
+.messages-list {
+    padding: 0;
+    margin: 0;
+    width: 360px;
+
+    .messages-list-item {
+        cursor: pointer;
+        border-bottom: 1px $light-grey solid;
+        height: 50px;
+
+        &:hover {
+            background-color: $light-grey;
+        }
+
+        .user-photo-container {
+            width: 60px;
+            text-align: center;
+            padding-top: 10px;
+            padding-left: 25px;
+            white-space: nowrap;
+
+            app-gravatar-image, .plus-users {
+                display: inline-block;
+                vertical-align: middle;
+                margin-left: -25px;
+            }
+
+            .plus-users {
+                width: 20px;
+                height: 20px;
+                line-height: 18px;
+                border-radius: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                color: white;
+                text-align: center;
+                margin-left: -21px;
+            }
+        }
+
+        .chat-name, .chat-message {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chat-name {
+            font-size: 14px;
+        }
+
+        .chat-message {
+            font-size: 12px;
+        }
+    }
+
+    .messages-list-item:last-child {
+        border-bottom: none;
+    }
+}

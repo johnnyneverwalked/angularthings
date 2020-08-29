@@ -1,0 +1,10 @@
+.egg {
+  position: absolute;
+  color: transparent;
+  bottom: 16px;
+  left: 16px;
+  &:hover {
+    color: white;
+  }
+  transition: .5s color ease-in-out;
+}

@@ -1,0 +1,149 @@
+<div class="chat-body bg-light position-relative container-fluid custom-scroller px-0 font-size-14" #body
+     [ngStyle]="{height: height ? height + 'px' : '80%'}"
+     (scroll)="loadMoreMessages()">
+    <app-loader [loading]="loading" type="square-loader" color="lightblue"></app-loader>
+    <div class="row pointer bg-lightgrey" *ngIf="messages?.length < totalMessages" (click)="loadMoreMessages()">
+        <div class="col font-weight-bold text-center text-secondary">
+            <i class="la la-redo-alt mr-1"></i>
+            <span>Load more messages...</span>
+        </div>
+    </div>
+    <div class="row m-0 p-0">
+        <div class="col-12 m-0 p-0">
+            <ul class="list-unstyled p-3 pl-4 m-0" #messageContainer>
+                <li *ngFor="let message of messages; let i = index; let l = last; let f = first"
+                    id="{{message.topic}}-msg-{{i}}">
+                    <div class="row"
+                         *ngIf="message.sender && !(restrictions && message.automated)"
+                         [class.pt-1]="isConsequent(messages[i - 1]?.sender, message.sender)"
+                         [class.pt-3]="!isConsequent(messages[i - 1]?.sender, message.sender) && !f">
+                        <div class="col-1 d-flex px-1 align-items-end text-right"
+                             [class.font-weight-bold]="static">
+                            <ng-container
+                                *ngIf="!isMine(message.sender) && !isConsequent(message.sender, messages[i + 1]?.sender)">
+                                <app-user-info [user]="message.sender"
+                                               *ngIf="!restrictions; else alias"
+                                               [showGravatar]="true"
+                                               [isChattable]="false"
+                                               [hideName]="!static">
+                                </app-user-info>
+                                <ng-template #alias>
+                                    <i class="la la-headset shadow-sm mr-1 p-1 font-weight-bold rounded-circle border-primary table-primary border"
+                                       title="Support">
+                                    </i>
+                                    <span class="font-weight-bold" *ngIf="static">Support</span>
+                                </ng-template>
+                            </ng-container>
+                        </div>
+                        <div class="col-10 p-0 d-flex chat-bubble-container"
+                             [class.justify-content-end]="isMine(message.sender)"
+                             [class.offset-1]="isMine(message.sender)">
+
+                            <ng-container *ngIf="!message.deleted; else deletedMessage">
+                                <div class="chat-bubble-options align-self-center" *ngIf="isMine(message.sender)">
+                                    <i class="la la-trash pointer ml-2 chat-bubble-option"
+                                       title="Delete message"
+                                       (click)="deleteMessage(message)">
+                                    </i>
+                                </div>
+                                <div
+                                    class="mx-2 chat-bubble text-break d-inline-block {{isMine(message.sender) ? color : 'bg-white'}} px-2 py-1"
+                                    title="{{message.createdAt|date: 'mediumDate'}} {{message.createdAt|date: 'shortTime'}}"
+                                    [ngClass]="{
+                                        'mine': isMine(message.sender),
+                                        'not-mine': !isMine(message.sender),
+                                        'last': !isConsequent(message.sender, messages[i + 1]?.sender) || (messages[i + 1]?.automated && false),
+                                        'first': !isConsequent(messages[i - 1]?.sender, message.sender) || (messages[i - 1]?.automated && false)
+                                    }"
+                                    [class.text-white]="isMine(message.sender)">
+                                    <div class="d-inline-block text-white p-1 border-radius bg-secondary mr-2"
+                                         *ngIf="message.receiver">
+                                        <span class="mr-1">To:</span>
+                                        <app-user-info [user]="message.receiver" [isChattable]="false"></app-user-info>
+                                    </div>
+                                    <ng-container *ngIf="message.automated">
+                                        <i class="la la-robot font-weight-bold mr-1"></i>
+                                        <span class="font-weight-bold">[Automated message]:</span>
+                                        <br>
+                                    </ng-container>
+
+                                    <span [innerHTML]="message.content|activateUrls"></span>
+                                    <br>
+                                    <small class="float-right font-italic font-weight-bold">
+                                        {{message.createdAt|date: 'mediumDate'}} {{message.createdAt|date: 'shortTime'}}
+                                    </small>
+
+                                    <ng-container *ngIf="chatHelper.isActionLegal(message.action)">
+                                        <hr class="my-1 bg-lightgrey" *ngIf="message.content">
+                                        <br *ngIf="!message.content">
+<!--                                        <app-chat-message-action [creator]="message.sender?._id || message.sender"-->
+<!--                                                                 [showAction]="!message.receiver || isMine(message.receiver)"-->
+<!--                                                                 (cancel)="handleActionEvent(message._id, 'cancel')"-->
+<!--                                                                 (complete)="handleActionEvent(message._id, 'complete')"-->
+<!--                                                                 (result)="handleActionEvent(message._id, 'result', $event, message.receiver)"-->
+<!--                                                                 [id]="message._id"-->
+<!--                                                                 [chat]="chat"-->
+<!--                                                                 [action]="message.action">-->
+<!--                                        </app-chat-message-action>-->
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                            <ng-template #deletedMessage>
+                                <i class="la la-eye pointer ml-2 align-self-center"
+                                   title="show delete message"
+                                   (click)="message.deleted = false"
+                                   *ngIf="superUser && isMine(message.sender)">
+                                </i>
+                                <div [ngClass]="{
+                                        'mine': isMine(message.sender),
+                                        'not-mine': !isMine(message.sender),
+                                        'last': !isConsequent(message.sender, messages[i + 1]?.sender) || (messages[i + 1]?.automated && false),
+                                        'first': !isConsequent(messages[i - 1]?.sender, message.sender) || (messages[i - 1]?.automated && false)
+                                    }"
+                                     class="mx-2 chat-bubble border text-black font-italic text-break shadow-sm d-inline-block px-2 py-1"
+                                     title="{{message.createdAt|date: 'mediumDate'}} {{message.createdAt|date: 'shortTime'}}">
+                                    <app-user-info [user]="message.sender" [isChattable]="false" *ngIf="!restrictions"></app-user-info>
+                                    <span *ngIf="restrictions">Support</span>
+                                    <span class="ml-1">deleted this message.</span>
+                                </div>
+                                <i class="la la-eye pointer mr-2 align-self-center"
+                                   title="show deleted message"
+                                   (click)="message.deleted = false"
+                                   *ngIf="superUser && !isMine(message.sender)">
+                                </i>
+                            </ng-template>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="hasSeen && !restrictions">
+                        <div class="col-12 d-flex px-1 justify-content-end">
+                            <app-chat-message-seen [messageSeen]="message.viewSeen | messageSeen:messages:i"
+                                                   [showNotYet]="[false, showNotSeenYet]">
+                            </app-chat-message-seen>
+                        </div>
+                    </div>
+                </li>
+                <li *ngIf="typing?.length && !restrictions">
+                    <div class="row pt-3">
+                        <div class="col p-0 align-self-end text-left">
+                            <ng-container *ngFor="let user of typing; let i = index">
+                                <app-user-info [user]="user"
+                                               *ngIf="i < 3"
+                                               [showGravatar]="true"
+                                               [isChattable]="false"
+                                               [hideName]="true">
+                                </app-user-info>
+                            </ng-container>
+
+                            <span class="font-weight-bold"
+                                  *ngIf="typing.length > 3">+{{typing.length - 3}}
+                                more people
+                            </span>
+                            <span class="font-weight-bold">{{typing.length === 1 ? 'is' : 'are'}} typing...</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+

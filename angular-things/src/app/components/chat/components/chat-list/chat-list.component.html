@@ -1,0 +1,42 @@
+<ul class="list-unstyled messages-list m-0 {{classes}}">
+    <li class="messages-list-item d-flex"
+        *ngFor="let chat of userChats; let l = last"
+        (click)="chatHelper.activateChat(chat)"
+    >
+        <div class="user-photo-container">
+            <ng-container *ngFor="let sub of chat.subscribers;let i = index">
+                <app-gravatar-image
+                    *ngIf="i < 3 && (sub.user?._id || sub.user) !== site.currentUser?._id"
+                    [value]="sub.user.email"
+                    [size]="30"
+                ></app-gravatar-image>
+                <div class="plus-users" *ngIf="i === 3"><small class="py-1">+{{chat.subscribers.length - 3}}</small></div>
+            </ng-container>
+        </div>
+        <div class="flex-grow-1 d-flex flex-column p-1">
+            <div
+                class="text-nowrap chat-name"
+                [class.font-weight-bold]="chat.messages?.unseen"
+            >
+                {{chatHelper.chatName(chat)}}
+                <span
+                    class="text-white bg-danger rounded ml-1 px-1"
+                    *ngIf="chat.messages?.unseen"
+                >{{chat.messages?.unseen}}</span>
+            </div>
+            <div class="chat-message text-muted"
+                 *ngIf="chat.messages?.last?.content">
+                {{ chat.messages?.last?.content }}
+            </div>
+        </div>
+    </li>
+    <li *ngIf="showViewAll">
+        <a
+            class="p-2 d-block text-center text-dark bg-light text-decoration-none"
+            [routerLink]="['/chat', 'topic', userChats[0]?.topic]"
+            target="_blank"
+        >
+            <i class="la la-eye mr-1"></i><span> View all in new tab</span>
+        </a>
+    </li>
+</ul>

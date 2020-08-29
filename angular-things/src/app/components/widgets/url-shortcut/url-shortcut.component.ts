@@ -4,7 +4,6 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {Location} from "@angular/common";
 import {IWidgetModification} from "../../../interfaces/IGridWidget";
 import {DefaultUrlSerializer, Router, UrlSerializer, UrlTree} from "@angular/router";
-import {AppComponent} from "../../../app.component";
 
 @Component({
     selector: "app-url-shortcut",
@@ -37,7 +36,6 @@ export class UrlShortcutComponent implements OnInit, AfterViewInit, OnDestroy {
         private router: Router,
         private location: Location,
         private cd: ChangeDetectorRef,
-        public appComponent: AppComponent
     ) {
       this.serializer = new CustomUrlSerializer();
     }

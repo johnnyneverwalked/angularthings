@@ -10,16 +10,14 @@ const routes: Routes = [
       {
         path: "tour-guide",
         loadChildren: () => import("./pages/tour-guide-view/tour-guide-view.module").then(m => m.TourGuideViewModule),
-        data: {
-          breadcrumb: "Tour Guide"
-        }
       },
       {
         path: "grid",
         loadChildren: () => import("./pages/grid-view/grid-view.module").then(m => m.GridViewModule),
-        data: {
-          breadcrumb: "Grid"
-        }
+      },
+      {
+        path: "chat",
+        loadChildren: () => import("./pages/chat-view/chat-view.module").then(m => m.ChatViewModule),
       }
     ]
   },

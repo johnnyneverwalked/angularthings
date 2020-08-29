@@ -1,0 +1,44 @@
+<div class="chat-simple p-0 border-radius-top shadow" #chatContainer
+     [ngStyle]="{height: isMinimized ? null : defaultDimensions.heights[aspect], width: defaultDimensions.widths[aspect]}"
+     *ngIf="chat">
+
+    <app-chat-header (minimize)="minimizeToggle()" #header
+                     [restrictions]="restrictions"
+                     (close)="closeChat()"
+                     (tryToJoin)="joinChat()"
+                     [static]="static"
+                     [unseenMessages]="messages | unseenMessages:chat"
+                     [self]="user?._id"
+                     [aspect]="aspect"
+                     [color]="chat.options?.color || defaultColor"
+                     [chat]="chat">
+    </app-chat-header>
+
+    <app-chat-body #body
+                   [restrictions]="restrictions"
+                   [loading]="loading"
+                   (loadMore)="loadMoreMessages()"
+                   (updateMessage)="updateMessage($event.messageId, $event.options)"
+                   [hidden]="isMinimized"
+                   [hasSeen]="hasSeen"
+                   [height]="chatContainer.offsetHeight - (header.header?.nativeElement.offsetHeight + footer.footer?.nativeElement.offsetHeight)"
+                   [chat]="chat"
+                   [static]="static"
+                   [color]="chat.options?.color || defaultColor"
+                   [self]="user?._id"
+                   [showNotSeenYet]="showNotSeenYet"
+                   [superUser]="site.amISuperUser()"
+                   [totalMessages]="totalMessages"
+                   [typing]="typing"
+                   [messages]="messages">
+    </app-chat-body>
+
+    <app-chat-footer [hidden]="isMinimized || !currentSub?.active" #footer
+                     [chat]="chat"
+                     [self]="user?._id"
+                     [width]="chatContainer.offsetWidth"
+                     (focusText)="onFocusText()"
+                     (startedTyping)="startedTyping()"
+                     (send)="sendMessage($event)">
+    </app-chat-footer>
+</div>

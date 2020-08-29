@@ -13,7 +13,8 @@ export class TourGuideViewComponent {
     {
       title: "Tour Guide Demo",
       text: "This is a demo for the TourGuide Component. In dev mode you can change the inputs on the fly from the menu" +
-        " on the bottom right of the screen."
+        " on the bottom right of the screen. TourGuide is not a wrapper for an existing library. " +
+        "It is a feature developed from scratch."
     },
     {
       id: "step2",

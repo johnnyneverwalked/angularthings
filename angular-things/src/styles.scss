@@ -55,6 +55,7 @@
     opacity: .35!important;
   }
 }
+
 .btn-circle {
   width: 38px;
   height: 38px;
@@ -78,6 +79,16 @@
 
 .border-radius {
   border-radius: 10px;
+}
+
+.border-radius-top {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.border-radius-bottom {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .tour-guide-highlighted {

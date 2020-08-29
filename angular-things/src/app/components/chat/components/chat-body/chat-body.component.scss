@@ -1,0 +1,69 @@
+@import "../../../../scss/colors.scss";
+
+.chat-body {
+    width: 100%;
+    //height: 80%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.border-both {
+    border-top: 2px solid red;
+    border-left: 2px solid red;
+    border-right: 2px solid blue;
+    border-bottom: 2px solid blue;
+}
+
+.border-red {
+    border: 2px solid red;
+}
+
+.border-blue {
+    border: 2px solid blue;
+}
+
+.chat-bubble-container {
+    .chat-bubble-options {
+        display: none;
+        .chat-bubble-option {
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            border-radius: 50%;
+            background-color: transparent;
+            &:hover {
+                background-color: darken($grey, 10%);
+            }
+        }
+    }
+    &:hover {
+        .chat-bubble-options {
+            display: block!important;
+        }
+    }
+}
+.chat-bubble {
+
+    border-radius: 4px;
+    &.mine {
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+        &.first {
+            border-top-right-radius: 15px;
+        }
+        &.last {
+            border-bottom-right-radius: 15px;
+        }
+    }
+    &.not-mine {
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+        &.first {
+            border-top-left-radius: 15px;
+        }
+        &.last {
+            border-bottom-left-radius: 15px;
+        }
+    }
+}

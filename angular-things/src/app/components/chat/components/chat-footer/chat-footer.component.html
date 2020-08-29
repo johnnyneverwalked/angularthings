@@ -1,0 +1,44 @@
+<div class="border-top m-0 py-0 chat-footer bg-white container-fluid" [ngStyle]="{width: width + 'px'}" #footer>
+        <div *ngIf="visibleMenu" #extraMenu
+             class="w-100 position-absolute font-size-22 bg-white overflow-x-auto horizontal-scrollbar text-{{chat?.options?.color || 'secondary'}}"
+             [ngStyle]="{top: -extraMenu.offsetHeight + 'px', left: 0}">
+            <div class="d-inline-block m-0 p-0 pointer basic-hover text-nowrap">
+                <i title="Upload an attachment (WIP)" class="la mx-1 la-paperclip"></i>
+                <i title="Set an event" class="la mx-1 la-calendar"></i>
+                <a [routerLink]="['/chat', 'full', 'topic', chat.topic]" target="_blank" [ngStyle]="{color: 'inherit'}">
+                    <i title="Open in new tab" class="la mx-1 la-external-link-square-alt"></i>
+                </a>
+            </div>
+        </div>
+    <div class="row">
+        <div *ngIf="!message?.length || aspect === 'full'"
+             class="d-inline-flex align-items-center font-size-22 pointer px-1 basic-hover text-center text-{{chat?.options?.color || 'secondary'}}">
+
+            <i (click)="visibleMenu = !visibleMenu"
+               title="{{!visibleMenu ? 'More' : 'Collapse'}} actions"
+               [class.la-ellipsis-v]="!visibleMenu"
+               [class.la-times]="visibleMenu"
+               class="la mr-1"></i>
+<!--            <i title="Create an action" class="la la-shapes mr-1" (click)="site.chatModal.show(chat, 'action', {sendFn: sendMessage.bind(this)})"></i>-->
+            <i title="Upload an image (WIP)" class="la la-image mr-1"></i>
+            <i title="Add an emote (WIP)" class="la la-smile"></i>
+        </div>
+
+        <div class="col message-text p-1 px-0">
+            <textarea [attr.resize]="'none'" #textContainer
+                      [rows]="rows"
+                      [cols]="cols"
+                      (focusin)="onFocusText()"
+                      (keydown)="sendMessage($event);"
+                      class="custom-scroller h-100 font-size-14 form-control"
+                      [(ngModel)]="message"
+                      placeholder="Aa"
+                      i18n-placeholder>
+            </textarea>
+        </div>
+        <div class="d-inline-flex align-items-center px-3 font-size-22 pointer text-center bg-white basic-hover text-right"
+             (click)="sendMessage()">
+            <i class="la la-paper-plane text-primary"></i>
+        </div>
+    </div>
+</div>

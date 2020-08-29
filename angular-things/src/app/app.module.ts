@@ -10,6 +10,12 @@ import {GridViewModule} from "./pages/grid-view/grid-view.module";
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { HomeComponent } from './pages/home/home.component';
 import {NgbTooltipModule} from "@ng-bootstrap/ng-bootstrap";
+import {ChatViewModule} from "./pages/chat-view/chat-view.module";
+import {StoreModule} from "@ngrx/store";
+import {initChatReducer} from "./reducers/chat/chat.reducer";
+import {initUserReducer} from "./reducers/user/user.reducer";
+import {ChatModule} from "./components/chat/chat.module";
+import {LocalStorageService, NgxWebstorageModule} from "ngx-webstorage";
 
 @NgModule({
   declarations: [
@@ -21,12 +27,23 @@ import {NgbTooltipModule} from "@ng-bootstrap/ng-bootstrap";
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
+    StoreModule.forRoot({
+      user: initUserReducer,
+      chats: initChatReducer,
+    }, {
+      runtimeChecks: {
+        strictStateImmutability: false,
+        strictActionImmutability: false
+      }
+    }),
     ButtonModule,
+    NgbTooltipModule,
     TourGuideViewModule,
     GridViewModule,
-    NgbTooltipModule
+    ChatViewModule,
+    ChatModule,
+    NgxWebstorageModule.forRoot()
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

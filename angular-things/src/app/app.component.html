@@ -1,32 +1,35 @@
 <div class="vh-100 w-100 d-flex flex-row container-fluid p-0">
 
-  <div class="bg-primary container-fluid text-white text-nowrap"
-       (mouseenter)="sideMenu.style.width = '20%'"
-       (mouseleave)="sideMenu.style.width = '5%'"
-       [ngStyle]="{width: '5%', height: '100%', transition: '.5s width ease-in-out'}"
-       #sideMenu>
-    <div class="row bg-dark" [class.text-center]="sideMenu.style.width === '5%'">
+  <div class="container-fluid text-white text-nowrap"
+       [class.bg-primary]="!enableGradient"
+       [class.gradient-animation]="enableGradient"
+       (mouseenter)="menuOpen = true"
+       (mouseleave)="menuOpen = false"
+       [ngStyle]="{width: menuOpen ? '300px' : '5%', height: '100%', transition: '.5s width ease-in-out'}">
+    <div class="row bg-dark" [class.text-center]="!menuOpen">
       <div class="col-12 p-3">
         <img class="mx-1 basic-hover cursor-pointer"
              width="40px" height="40px" src="assets/favicon/apple-touch-icon.png"
              title="Home"
              [routerLink]="'/home'">
-        <ng-container *ngIf="sideMenu.style.width === '20%'">
-          <h4 class="font-weight-bold d-inline">John's salad bar!</h4>
+        <ng-container *ngIf="menuOpen">
+          <h4 @fadeIn class="font-weight-bold d-inline">John's salad bar!</h4>
           <br>
-          <small class="font-italic">*But <b class="text-success">salads</b> are <b class="text-success">components</b> instead.</small>
+          <small @fadeIn class="font-italic">*But <b class="text-success">salads</b> are <b class="text-success">components</b> instead.</small>
         </ng-container>
       </div>
     </div>
     <div class="row" *ngFor="let item of menu">
-      <div class="col-12 p-3 border-radius basic-hover font-weight-bold cursor-pointer text-center"
+      <div class="col p-3 border-radius basic-hover font-weight-bold cursor-pointer text-center"
            [routerLink]="item.path" [queryParams]="item.params || {}">
         <i class="mr-1 la la-2x {{item.icon}}"></i>
-        <span *ngIf="sideMenu.style.width === '20%'">{{item.name}}</span>
+        <span @fadeIn *ngIf="menuOpen">{{item.name}}</span>
       </div>
     </div>
   </div>
-  <div class="flex-fill bg-light overflow-y-auto" [ngStyle]="{'z-index': 1}">
+  <div class="flex-fill overflow-y-auto" [ngStyle]="{'z-index': 1}"
+       [class.bg-light]="!enableGradient"
+       [class.bg-secondary]="enableGradient">
     <div class="container-fluid">
       <div class="row">
         <div class="col p-4">
@@ -34,5 +37,12 @@
         </div>
       </div>
     </div>
+
+    <app-chat-container></app-chat-container>
   </div>
 </div>
+
+<i class="la font-weight-bold la-egg la-2x pointer position-absolute egg"
+   title="easter egg :)"
+   (click)="enableGradient = !enableGradient">
+</i>

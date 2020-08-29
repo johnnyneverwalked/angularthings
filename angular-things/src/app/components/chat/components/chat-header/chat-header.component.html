@@ -1,0 +1,46 @@
+<div class="row m-0 chat-header pointer p-2 border-radius-top text-white {{color}}"
+     (click)="minimize.emit()" #header
+     *ngIf="chat">
+    <div class="col align-self-center px-1">
+        <ng-container *ngIf="chat.topic.startsWith('chat-' + chatTypes.Direct); else notDirect">
+            <app-user-info [isChattable]="false" [showGravatar]="true" [user]="receiver" class="align-middle"></app-user-info>
+        </ng-container>
+        <ng-template #notDirect>
+            <i class="mr-1 {{chat.options?.icon || 'la la-comments'}}"></i>
+            <span class="font-size-14" title="{{chatHelper.chatName(chat)}}">{{headerTitle}}</span>
+        </ng-template>
+        <span class="ml-2 badge-pill badge badge-danger align-middle"
+              [ngbTooltip]="unseenMessages > 1 ? multiple : one"
+              *ngIf="unseenMessages > 0">
+            {{unseenMessages}}
+        </span>
+        <ng-template #one><span>1 unread message</span></ng-template>
+        <ng-template #multiple><span>{{unseenMessages}} unread messages</span></ng-template>
+    </div>
+
+    <div class="col-4 text-right p-0">
+<!--        <div class="px-1 d-inline-block basic-hover rounded-circle" (click)="toggleOptions($event, 'info')">-->
+<!--            <i class="la la-info-circle"></i>-->
+<!--        </div>-->
+
+<!--        <ng-container *ngIf="chat && !restrictions">-->
+<!--            <div class="px-1 d-inline-block basic-hover rounded-circle" (click)="toggleOptions($event)" *ngIf="showMenu; else join">-->
+<!--                <i class="la la-cog"></i>-->
+<!--            </div>-->
+<!--            <ng-template #join>-->
+<!--                <app-button [small]="true"-->
+<!--                            action="add"-->
+<!--                            displayName="Join"-->
+<!--                            (btnClick)="tryToJoin.emit()"-->
+<!--                            *ngIf="static">-->
+<!--                </app-button>-->
+<!--            </ng-template>-->
+<!--        </ng-container>-->
+
+
+        <div class="px-1 d-inline-block basic-hover rounded-circle" (click)="close.emit()" *ngIf="aspect !== 'full'">
+            <i class="la font-weight-bold la-times"></i>
+        </div>
+    </div>
+</div>
+

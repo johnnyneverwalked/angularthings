@@ -1,0 +1,28 @@
+@import "src/app/scss/colors";
+
+
+.chat-footer {
+    //width: 100%;
+    min-height: 40px;
+    max-height: 30%;
+    position: absolute;
+    bottom: 0;
+}
+
+.message-text {
+    & textarea {
+        border-radius: 15px;
+        resize: none;
+        &:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+    }
+}
+
+.basic-hover {
+    & i:hover {
+        color: $blue;
+        transition: all .3s ease;
+    }
+}

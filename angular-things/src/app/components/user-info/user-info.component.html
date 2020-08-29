@@ -1,0 +1,13 @@
+<div class="d-inline-block" [title]="(isChattable) ? 'Send message' : ''"
+     [class.pointer]="isChattable"
+     *ngIf="user" (click)="(isChattable) ? chatHelper.initChat(user) : null">
+
+    <app-gravatar-image [title]="hideName ? user.fullName : ''"
+                        *ngIf="!user.image && showGravatar"
+                        [size]="gravatarSize"
+                        [value]="user?.email">
+    </app-gravatar-image>
+    <ng-container *ngIf="!hideName">
+        <span>{{user?.fullName}}</span>
+    </ng-container>
+</div>
