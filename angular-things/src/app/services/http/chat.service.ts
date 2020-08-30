@@ -8,7 +8,7 @@ import {Observable, of} from "rxjs";
 import * as moment from "moment";
 import {ChatFacade} from "../../reducers/chat/chat.facade";
 import {map, skip, take} from "rxjs/operators";
-import {sortBy} from "lodash";
+import {sortBy, reverse} from "lodash";
 import {CURRENT_USER_ID} from "../../interfaces/IUser";
 
 @Injectable({providedIn: "root"})
@@ -63,7 +63,7 @@ export class ChatService {
 
     getMessages(topic: string, before?: string): Observable<IChatMessage[]> {
       return this.chatFacade.messages.pipe(take(1), map(res => {
-        return sortBy((res || []).filter(msg => msg.topic === topic), (msg) => moment(msg.createdAt).toDate());
+        return reverse(sortBy((res || []).filter(msg => msg.topic === topic), (msg) => moment(msg.createdAt).toDate()));
       }));
         // return this.httpClient.get(`${this.messageUrl}`, {
         //     params: {
