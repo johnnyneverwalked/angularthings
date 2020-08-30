@@ -9,13 +9,13 @@
             <i class="mr-1 {{chat.options?.icon || 'la la-comments'}}"></i>
             <span class="font-size-14" title="{{chatHelper.chatName(chat)}}">{{headerTitle}}</span>
         </ng-template>
-        <span class="ml-2 badge-pill badge badge-danger align-middle"
-              [ngbTooltip]="unseenMessages > 1 ? multiple : one"
-              *ngIf="unseenMessages > 0">
-            {{unseenMessages}}
-        </span>
-        <ng-template #one><span>1 unread message</span></ng-template>
-        <ng-template #multiple><span>{{unseenMessages}} unread messages</span></ng-template>
+<!--        <span class="ml-2 badge-pill badge badge-danger align-middle"-->
+<!--              [ngbTooltip]="unseenMessages > 1 ? multiple : one"-->
+<!--              *ngIf="unseenMessages > 0">-->
+<!--            {{unseenMessages}}-->
+<!--        </span>-->
+<!--        <ng-template #one><span>1 unread message</span></ng-template>-->
+<!--        <ng-template #multiple><span>{{unseenMessages}} unread messages</span></ng-template>-->
     </div>
 
     <div class="col-4 text-right p-0">

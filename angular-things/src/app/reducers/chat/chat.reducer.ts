@@ -25,8 +25,9 @@ const ChatReducer = createReducer(
     }),
 
     on(chatActions.send, (state, message) => {
-      state.messages.push(message.message);
-      state.event = {event: ChatEvents.NewMessage + "$", message: message.message};
+      const msg = {...message.message, createdAt: moment().toISOString()}
+      state.messages.push(msg);
+      state.event = {event: ChatEvents.NewMessage + "$", message: msg};
       return {...state};
     }),
 

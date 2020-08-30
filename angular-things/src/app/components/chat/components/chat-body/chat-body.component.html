@@ -22,7 +22,7 @@
                             <ng-container
                                 *ngIf="!isMine(message.sender) && !isConsequent(message.sender, messages[i + 1]?.sender)">
                                 <app-user-info [user]="message.sender"
-                                               *ngIf="!restrictions; else alias"
+                                               *ngIf="true; else alias"
                                                [showGravatar]="true"
                                                [isChattable]="false"
                                                [hideName]="!static">

@@ -1,7 +1,7 @@
 <ul class="list-unstyled messages-list m-0 {{classes}}">
     <li class="messages-list-item d-flex"
         *ngFor="let chat of userChats; let l = last"
-        (click)="chatHelper.activateChat(chat)"
+        (click)="showViewAll ? chatHelper.activateChat(chat) : changeTopic(chat)"
     >
         <div class="user-photo-container">
             <ng-container *ngFor="let sub of chat.subscribers;let i = index">
@@ -19,21 +19,20 @@
                 [class.font-weight-bold]="chat.messages?.unseen"
             >
                 {{chatHelper.chatName(chat)}}
-                <span
-                    class="text-white bg-danger rounded ml-1 px-1"
-                    *ngIf="chat.messages?.unseen"
+                <span class="text-white bg-danger rounded ml-1 px-1"
+                    *ngIf="chat.messages?.unseen && false"
                 >{{chat.messages?.unseen}}</span>
             </div>
             <div class="chat-message text-muted"
                  *ngIf="chat.messages?.last?.content">
-                {{ chat.messages?.last?.content }}
+                {{ chat.messages.last.content.slice(0, 30) }} {{chat.messages.last.content.length > 30 ? '...' : ''}}
             </div>
         </div>
     </li>
     <li *ngIf="showViewAll">
         <a
             class="p-2 d-block text-center text-dark bg-light text-decoration-none"
-            [routerLink]="['/chat', 'topic', userChats[0]?.topic]"
+            [routerLink]="['/chat/full', 'topic', userChats[0]?.topic]"
             target="_blank"
         >
             <i class="la la-eye mr-1"></i><span> View all in new tab</span>

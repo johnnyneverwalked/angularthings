@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IChatWithUnseen} from "../../../../interfaces/IChat";
+import {IChat, IChatWithUnseen} from "../../../../interfaces/IChat";
 import {ChatHelperService} from "../../../../services/chat-helper.service";
 import {SiteService} from "../../../../services/site.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-chat-list',
@@ -17,10 +18,16 @@ export class ChatListComponent implements OnInit {
     constructor(
         public chatHelper: ChatHelperService,
         public site: SiteService,
+        private router: Router
     ) {
     }
 
     ngOnInit(): void {
     }
+
+  changeTopic(chat: IChat) {
+      this.router.navigate(['/chat', 'full', 'topic', chat.topic]);
+
+  }
 
 }

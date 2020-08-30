@@ -8,7 +8,7 @@
                      (tryToJoin)="joinChat()"
                      [static]="static"
                      [unseenMessages]="messages | unseenMessages:chat"
-                     [self]="user?._id"
+                     [self]="user?._id || user"
                      [aspect]="aspect"
                      [color]="chat.options?.color || defaultColor"
                      [chat]="chat">
@@ -25,7 +25,7 @@
                    [chat]="chat"
                    [static]="static"
                    [color]="chat.options?.color || defaultColor"
-                   [self]="user?._id"
+                   [self]="user?._id || user"
                    [showNotSeenYet]="showNotSeenYet"
                    [superUser]="site.amISuperUser()"
                    [totalMessages]="totalMessages"
@@ -35,7 +35,7 @@
 
     <app-chat-footer [hidden]="isMinimized || !currentSub?.active" #footer
                      [chat]="chat"
-                     [self]="user?._id"
+                     [self]="user?._id || user"
                      [width]="chatContainer.offsetWidth"
                      (focusText)="onFocusText()"
                      (startedTyping)="startedTyping()"

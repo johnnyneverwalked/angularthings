@@ -7,7 +7,7 @@ import {reverse} from "lodash";
 import * as moment from "moment";
 import {ChatBodyComponent} from "./components/chat-body/chat-body.component";
 import {UserFacade} from "../../reducers/user/user.facade";
-import {IUser} from "../../interfaces/IUser";
+import {CURRENT_USER_ID, IUser} from "../../interfaces/IUser";
 import {LocalStorageService} from "ngx-webstorage";
 import IStringMap from "../../interfaces/StringMap";
 import {HelperService} from "../../services/helper.service";
@@ -181,6 +181,13 @@ export class ChatComponent implements AfterViewInit, OnDestroy {
     if (message.sender !== this.user?._id) {
       this.chatFacade.unseen(this.topic, message);
     }
+    if (message.sender === CURRENT_USER_ID) {
+      const user = this.chat.subscribers.find(u => u.user !== CURRENT_USER_ID)
+      if (user) {
+        setTimeout(() => this.sendMessage({sender: user.user, content: this.chatHelper.autoResponse}), 500)
+
+      }
+    }
   }
 
   private _handleExistingMessage(message: IChatMessage) {
@@ -276,6 +283,18 @@ export class ChatComponent implements AfterViewInit, OnDestroy {
 
     this.chat = chatRes.chat;
     this.topic = this.chat.topic;
+    if (chatRes.new) {
+      const user = this.chat.subscribers.find(u => u.user !== CURRENT_USER_ID);
+      this.sendMessage({
+        topic: this.topic,
+        sender: user?.user || CURRENT_USER_ID,
+        automated: true,
+        content: `
+        Hello there! This is a full fledged chat system that uses Socket.io and a database to send messages in
+        realtime while also saving the conversation. Since this is an Angular only project though, we temporarily removed all that and
+        replaced it with ngRx's Store to simulate the effect. Other than Socket.io, this chat is not dependent on any library.`
+      })
+    }
 
     await HelperService.sleep(500);
     this.getMessages(this.topic);
@@ -356,7 +375,6 @@ export class ChatComponent implements AfterViewInit, OnDestroy {
   }
 
   public updateMessage(_id: string, options: any) {
-    console.log(_id);
     this.chatService.updateMessage(_id, options).subscribe(res => {
     });
   }

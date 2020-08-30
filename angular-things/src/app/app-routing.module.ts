@@ -8,6 +8,10 @@ const routes: Routes = [
     path: "",
     children: [
       {
+        path: "",
+        loadChildren: () => import("./pages/home/home.module").then(m => m.HomeModule)
+      },
+      {
         path: "tour-guide",
         loadChildren: () => import("./pages/tour-guide-view/tour-guide-view.module").then(m => m.TourGuideViewModule),
       },
@@ -21,7 +25,7 @@ const routes: Routes = [
       }
     ]
   },
-  {path: "home", component: HomeComponent},
+  // {path: "home", component: HomeComponent},
   {path: "**", component: NotFoundComponent}
 
 

@@ -2,6 +2,15 @@
 .overflow-y-auto {
   overflow-y: auto !important;
 }
+.overflow-y-hidden {
+  overflow-y: hidden !important;
+}
+.overflow-x-auto {
+  overflow-x: auto !important;
+}
+.overflow-x-hidden {
+  overflow-x: hidden !important;
+}
 
 .cursor-pointer {
   cursor: pointer!important;
@@ -9,6 +18,12 @@
 
 .pointer {
   cursor: pointer!important;
+}
+
+@for $i from 1 through 50 {
+  .font-size-#{$i} {
+    font-size: #{$i}px !important;
+  }
 }
 
 .custom-scroller {

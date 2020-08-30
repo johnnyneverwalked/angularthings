@@ -34,7 +34,7 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.router.navigate(["/home"]);
+    // this.router.navigate(["/home"]);
     this.userFacade.load(CURRENT_USER_ID);
     // this.storage.store(StoredChats, []);
   }

@@ -132,4 +132,21 @@ export class ChatHelperService {
         };
     }
 
+    get autoResponse(): string {
+      const responses = [
+        "Oh really?",
+        "You don't say!",
+        "Aha... I see...",
+        "That's mighty interesting.",
+        "If you had a truck, what would you put in it?",
+        "I see your point...",
+        "We can agree to disagree",
+        "Cool!",
+        "How about the opposite though?",
+        "You should patent that!",
+        "Ha ha! Nice!"
+      ]
+      return responses[Math.floor(Math.random() * responses.length)];
+    }
+
 }

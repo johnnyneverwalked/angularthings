@@ -8,20 +8,18 @@ import {TourGuideViewModule} from "./pages/tour-guide-view/tour-guide-view.modul
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {GridViewModule} from "./pages/grid-view/grid-view.module";
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { HomeComponent } from './pages/home/home.component';
 import {NgbTooltipModule} from "@ng-bootstrap/ng-bootstrap";
 import {ChatViewModule} from "./pages/chat-view/chat-view.module";
 import {StoreModule} from "@ngrx/store";
 import {initChatReducer} from "./reducers/chat/chat.reducer";
 import {initUserReducer} from "./reducers/user/user.reducer";
 import {ChatModule} from "./components/chat/chat.module";
-import {LocalStorageService, NgxWebstorageModule} from "ngx-webstorage";
+import {NgxWebstorageModule} from "ngx-webstorage";
 
 @NgModule({
   declarations: [
     AppComponent,
-    NotFoundComponent,
-    HomeComponent
+    NotFoundComponent
   ],
   imports: [
     BrowserAnimationsModule,
