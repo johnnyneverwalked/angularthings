@@ -154,7 +154,6 @@ export class GridComponent implements OnInit, OnDestroy {
       layoutOnInit: !this.enableEdit,
     }).on("dragReleaseEnd", (item) => {
       // if the item is added send the template back and create the actual widget
-      console.log(item);
       if (this.movingItem) {
         this._addItem(this.availableWidgets[this.movingItem]);
         item.getElement().classList.remove("widget-moving");
