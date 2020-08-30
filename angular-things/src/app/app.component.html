@@ -5,7 +5,7 @@
        [class.gradient-animation]="enableGradient"
        (mouseenter)="menuOpen = true"
        (mouseleave)="menuOpen = false"
-       [ngStyle]="{width: menuOpen ? '300px' : '5%', height: '100%', transition: '.5s width ease-in-out'}">
+       [ngStyle]="{width: menuOpen ? '300px' : '5%', 'min-width': '75px', height: '100%', transition: '.5s width ease-in-out'}">
     <div class="row bg-dark" [class.text-center]="!menuOpen">
       <div class="col-12 p-3">
         <img class="mx-1 basic-hover cursor-pointer"
