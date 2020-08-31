@@ -7,3 +7,5 @@ A step by step guide to walk you through how to use a feature.
 A customizable dashboard with dynamic widgets.
 ### Chat
 A chat feature with realtime messaging.
+
+##### There is also an easter egg somewhere, try to find it and click on it :)
